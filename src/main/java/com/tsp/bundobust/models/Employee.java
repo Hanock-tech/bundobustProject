@@ -27,37 +27,21 @@ public class Employee {
 
 	private Set<String> roles = new HashSet<>();
 
-	private String sdpoId;
-
 	private String sdpoName;
-
-	private String districtId;
 
 	private String districtName;
 
-	private String divisionId;
-
 	private String divisonName;
 
-	private String circleId;
-
 	private String circleName;
-
-	private String policeStationId;
 
 	private String policeStationName;
 	
 	private String commissionerateName;
 	
-	private String commissionerateId;
+	private String zoneName;
 	
-	private String reportingOfficerId;
-	
-	private String reportingOfficeTitle;
-	
-	private String reportingOfficerFirstName;
-	
-	private String reportingOfficerLastName;
+	private String officeType;
 
 
 	public Employee() {
@@ -70,19 +54,15 @@ public class Employee {
 		this.firstName = request.getFirstName();
 		this.lastName = request.getLastName();
 		this.password = request.getPassword();
-		this.districtId = request.getDistrictId();
 		this.districtName = request.getDistrictName();
-		this.sdpoId = request.getSdpoId();
 		this.sdpoName = request.getSdpoName();
-		this.divisionId = request.getDivisionId();
-		this.divisonName = request.getDivisonName();
-		this.circleId = request.getCircleId();
 		this.circleName = request.getCircleName();
-		this.policeStationId = request.getPoliceStationId();
 		this.policeStationName = request.getPoliceStationName();
-		this.commissionerateId = request.getCommissionerateId();
 		this.commissionerateName = request.getCommissionerateName();
+		this.divisonName = request.getDivisionName();
+		this.zoneName = request.getZoneName();
 		this.email = request.getEmail();
+		this.officeType = request.getOfficeType();
 	}
 
 	public String getId() {
@@ -125,20 +105,78 @@ public class Employee {
 		this.commissionerateName = commissionerateName;
 	}
 
-	public String getCommissionerateId() {
-		return commissionerateId;
-	}
-
-	public void setCommissionerateId(String commissionerateId) {
-		this.commissionerateId = commissionerateId;
-	}
-	
 	public String getSdpoName() {
 		return sdpoName;
 	}
 
 	public void setSdpoName(String sdpoName) {
 		this.sdpoName = sdpoName;
+	}
+	
+	
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getDistrictName() {
+		return districtName;
+	}
+
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
+	}
+
+	public String getDivisonName() {
+		return divisonName;
+	}
+
+	public void setDivisonName(String divisonName) {
+		this.divisonName = divisonName;
+	}
+
+	public String getCircleName() {
+		return circleName;
+	}
+
+	public void setCircleName(String circleName) {
+		this.circleName = circleName;
+	}
+
+	public String getPoliceStationName() {
+		return policeStationName;
+	}
+
+	public void setPoliceStationName(String policeStationName) {
+		this.policeStationName = policeStationName;
+	}
+
+	public String getZoneName() {
+		return zoneName;
+	}
+
+	public void setZoneName(String zoneName) {
+		this.zoneName = zoneName;
+	}
+
+	public String getOfficeType() {
+		return officeType;
+	}
+
+	public void setOfficeType(String officeType) {
+		this.officeType = officeType;
 	}
 
 	@Override

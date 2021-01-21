@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class SignupRequest {
 	
 	private String id;
+	
    
 	private String firstName;
 	
@@ -34,29 +35,19 @@ public class SignupRequest {
     @NotBlank
     private String officeType;
     
-    private String sdpoId;
-    
     private String sdpoName;
-    
-    private String districtId;
     
     private String districtName;
     
-    private String commissionerateId;
+    private String circleName;
+    
+    private String policeStationName;
     
     private String commissionerateName;
     
-    private String divisionId;
+    private String zoneName;
     
-    private String divisonName;
-    
-    private String circleId;
-    
-    private String circleName;
-    
-    private String policeStationId;
-    
-    private String policeStationName;
+    private String divisionName;
     
     
     public String getId() {
@@ -91,28 +82,12 @@ public class SignupRequest {
 		this.password = password;
 	}
 
-	public String getSdpoId() {
-		return sdpoId;
-	}
-
-	public void setSdpoId(String sdpoId) {
-		this.sdpoId = sdpoId;
-	}
-
 	public String getSdpoName() {
 		return sdpoName;
 	}
 
 	public void setSdpoName(String sdpoName) {
 		this.sdpoName = sdpoName;
-	}
-
-	public String getDistrictId() {
-		return districtId;
-	}
-
-	public void setDistrictId(String districtId) {
-		this.districtId = districtId;
 	}
 
 	public String getDistrictName() {
@@ -123,30 +98,6 @@ public class SignupRequest {
 		this.districtName = districtName;
 	}
 
-	public String getDivisionId() {
-		return divisionId;
-	}
-
-	public void setDivisionId(String divisionId) {
-		this.divisionId = divisionId;
-	}
-
-	public String getDivisonName() {
-		return divisonName;
-	}
-
-	public void setDivisonName(String divisonName) {
-		this.divisonName = divisonName;
-	}
-
-	public String getCircleId() {
-		return circleId;
-	}
-
-	public void setCircleId(String circleId) {
-		this.circleId = circleId;
-	}
-
 	public String getCircleName() {
 		return circleName;
 	}
@@ -155,28 +106,12 @@ public class SignupRequest {
 		this.circleName = circleName;
 	}
 
-	public String getPoliceStationId() {
-		return policeStationId;
-	}
-
-	public void setPoliceStationId(String policeStationId) {
-		this.policeStationId = policeStationId;
-	}
-
 	public String getPoliceStationName() {
 		return policeStationName;
 	}
 
 	public void setPoliceStationName(String policeStationName) {
 		this.policeStationName = policeStationName;
-	}
-
-	public String getCommissionerateId() {
-		return commissionerateId;
-	}
-
-	public void setCommissionerateId(String commissionerateId) {
-		this.commissionerateId = commissionerateId;
 	}
 
 	public String getCommissionerateName() {
@@ -209,6 +144,22 @@ public class SignupRequest {
 
 	public void setOfficeType(String officeType) {
 		this.officeType = officeType;
+	}
+
+	public String getZoneName() {
+		return zoneName;
+	}
+
+	public void setZoneName(String zoneName) {
+		this.zoneName = zoneName;
+	}
+
+	public String getDivisionName() {
+		return divisionName;
+	}
+
+	public void setDivisionName(String divisionName) {
+		this.divisionName = divisionName;
 	}
 
 	@Override

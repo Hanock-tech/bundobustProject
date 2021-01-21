@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +95,8 @@ public class AuthController {
 	public void registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		log.info("registerUser: signUpRequest={}", signUpRequest);
 		
+		validateRequest(signUpRequest);
+		
 		if (employeeRepository.existsByid(signUpRequest.getId())) {
 			throw new InvalidRequestException(IRErrorCode.USER_NAME_ALREADY_EXISTS.getErrorCode(), 
 					propertyUtil.getValue(IRErrorCode.USER_NAME_ALREADY_EXISTS.getErrorCode()));
@@ -123,5 +126,11 @@ public class AuthController {
 		}
 		employee.setRoles(roles);
 		employeeRepository.save(employee);
+	}
+
+	private void validateRequest(@Valid SignupRequest signUpRequest) {
+		
+		// TODO: Validations
+		
 	}
 }
