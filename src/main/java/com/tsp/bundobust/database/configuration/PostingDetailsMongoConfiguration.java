@@ -9,12 +9,13 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import com.mongodb.client.MongoClient;
 
 @Configuration
-@EnableMongoRepositories(basePackages = "com.tsp.bundobust.payload.repository",
-							mongoTemplateRef = "employeeDbMongoTemplate")
-public class UserRepositoryMongoConfiguration {
-
-    @Bean
-    public MongoTemplate employeeDbMongoTemplate(@Qualifier("mongo")MongoClient mongo) throws Exception {        return new MongoTemplate(mongo, "employeeDatabase");
-    }
+@EnableMongoRepositories(basePackages = "com.tsp.bundobust.uireferencedb.repository",
+mongoTemplateRef = "uiReferenceDbMongoTemplate")
+public class PostingDetailsMongoConfiguration {
 	
+	  @Bean
+	    public MongoTemplate uiReferenceDbMongoTemplate(@Qualifier("mongo")MongoClient mongo) throws Exception {
+	        return new MongoTemplate(mongo, "uiReferenceDatabase");
+	    }
+
 }
