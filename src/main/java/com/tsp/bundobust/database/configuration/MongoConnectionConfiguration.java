@@ -12,7 +12,6 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 
 @Configuration
-@EnableMongoRepositories(basePackages = "com.tsp.bundobust.payload.repository")
 public class MongoConnectionConfiguration {
 
 	@Value("${spring.data.mongodb.uri}")
@@ -30,9 +29,4 @@ public class MongoConnectionConfiguration {
         return MongoClients.create(mongoClientSettings);
     }
     
-    @Bean
-    public MongoTemplate mongoTemplate() throws Exception {
-        return new MongoTemplate(mongo(), "employeeDatabase");
-    }
-
 }

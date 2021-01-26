@@ -9,7 +9,5 @@ import com.tsp.bundobust.models.Employee;
 @Repository
 public interface UserRepository extends MongoRepository<Employee, String> {
 	
-	//Optional<Employee> findByUsername(String username);
-
 	Boolean existsByid(String id);
 }
