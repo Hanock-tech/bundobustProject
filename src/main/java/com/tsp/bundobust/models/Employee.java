@@ -8,6 +8,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.tsp.bundobust.payload.request.Address;
+import com.tsp.bundobust.payload.request.BankDetails;
+import com.tsp.bundobust.payload.request.HealthDetails;
+import com.tsp.bundobust.payload.request.PersonalSkills;
+import com.tsp.bundobust.payload.request.ProfessionalSkills;
 import com.tsp.bundobust.payload.request.SignupRequest;
 
 
@@ -43,6 +48,13 @@ public class Employee {
 	
 	private String officeType;
 
+	private PersonalSkills personalSkills; 
+	
+	private BankDetails bankDetails;
+	
+	private Address address;
+	
+	private HealthDetails healthDetails;
 
 	public Employee() {
 		
