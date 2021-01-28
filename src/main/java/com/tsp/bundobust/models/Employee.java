@@ -8,24 +8,19 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.tsp.bundobust.payload.request.Address;
-import com.tsp.bundobust.payload.request.BankDetails;
-import com.tsp.bundobust.payload.request.HealthDetails;
-import com.tsp.bundobust.payload.request.PersonalSkills;
-import com.tsp.bundobust.payload.request.ProfessionalSkills;
 import com.tsp.bundobust.payload.request.SignupRequest;
-
+import com.tsp.bundobust.payload.request.UiPostingDetailsRequest;
 
 @Document(collection = "employee_data")
 public class Employee {
-	
+
 	@Id
 	private String id;
 
 	private String firstName;
-	
+
 	private String lastName;
-	
+
 	private String email;
 
 	private String password;
@@ -41,27 +36,21 @@ public class Employee {
 	private String circleName;
 
 	private String policeStationName;
-	
+
 	private String commissionerateName;
-	
+
 	private String zoneName;
-	
+
 	private String officeType;
 
-	private PersonalSkills personalSkills; 
-	
-	private BankDetails bankDetails;
-	
-	private Address address;
-	
-	private HealthDetails healthDetails;
+	private UiPostingDetailsRequest UipostDetailsRequest;
 
 	public Employee() {
-		
+
 	}
-	
+
 	public Employee(SignupRequest request) {
-		
+
 		this.id = request.getId();
 		this.firstName = request.getFirstName();
 		this.lastName = request.getLastName();
@@ -124,8 +113,6 @@ public class Employee {
 	public void setSdpoName(String sdpoName) {
 		this.sdpoName = sdpoName;
 	}
-	
-	
 
 	public String getFirstName() {
 		return firstName;
@@ -189,6 +176,14 @@ public class Employee {
 
 	public void setOfficeType(String officeType) {
 		this.officeType = officeType;
+	}
+
+	public UiPostingDetailsRequest getUipostDetailsRequest() {
+		return UipostDetailsRequest;
+	}
+
+	public void setUipostDetailsRequest(UiPostingDetailsRequest uipostDetailsRequest) {
+		UipostDetailsRequest = uipostDetailsRequest;
 	}
 
 	@Override

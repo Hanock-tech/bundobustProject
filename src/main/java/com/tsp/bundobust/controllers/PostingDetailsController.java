@@ -2,6 +2,7 @@ package com.tsp.bundobust.controllers;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tsp.bundobust.models.Employee;
+import com.tsp.bundobust.payload.repository.UserRepository;
 import com.tsp.bundobust.payload.request.UiPostingDetailsRequest;
 import com.tsp.bundobust.payload.response.UIPostingDetailsResponse;
 import com.tsp.bundobust.response.UIBaseResponse;
@@ -17,17 +20,20 @@ import com.tsp.bundobust.response.UIBaseResponse;
 @RestController
 @RequestMapping("/api/employee")
 public class PostingDetailsController {
+	@Autowired
+	UserRepository employeeRepository;
 
-	@PostMapping(path="/posting/details",
-			headers="X-Version=1.0",
-			consumes=MediaType.APPLICATION_JSON_VALUE,
-			produces=MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/posting/details", headers = "X-Version=1.0", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UIBaseResponse> updatePostingDetails(
-			@Valid  @RequestBody  UiPostingDetailsRequest uiPostingDetailsRequest) {
+			@Valid @RequestBody UiPostingDetailsRequest uiPostingDetailsRequest) {
 
 		UIBaseResponse response = new UIBaseResponse();
-		
+
 		// TODO: Create Employee Object and persist in employee database
+		Employee employee = new Employee();
+
+		employee.setUipostDetailsRequest(uiPostingDetailsRequest);
+		employeeRepository.save(employee);
 
 		UIPostingDetailsResponse uiPostingDetailsResponse = new UIPostingDetailsResponse();
 		uiPostingDetailsResponse.setId(uiPostingDetailsRequest.getPostingDetails().getId());
