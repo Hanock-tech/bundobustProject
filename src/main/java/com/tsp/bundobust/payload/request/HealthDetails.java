@@ -7,41 +7,32 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class HealthDetails {
 
-	private boolean hasUnderAnyMedication;
-	private String hasTypeOfMedication;
-	private String hasReason;
-	private List<String> hasMedications;
-
-	public boolean isHasUnderAnyMedication() {
-		return hasUnderAnyMedication;
+	private boolean isUnderAnyMedication;
+	private List<String> typeOfMedications;
+	private String reason; // if the medication selected is others
+	
+	public boolean isUnderAnyMedication() {
+		return isUnderAnyMedication;
 	}
 
-	public void setHasUnderAnyMedication(boolean hasUnderAnyMedication) {
-		this.hasUnderAnyMedication = hasUnderAnyMedication;
+	public void setUnderAnyMedication(boolean isUnderAnyMedication) {
+		this.isUnderAnyMedication = isUnderAnyMedication;
 	}
 
-	public String getHasTypeOfMedication() {
-		return hasTypeOfMedication;
+	public List<String> getTypeOfMedications() {
+		return typeOfMedications;
 	}
 
-	public void setHasTypeOfMedication(String hasTypeOfMedication) {
-		this.hasTypeOfMedication = hasTypeOfMedication;
+	public void setTypeOfMedications(List<String> typeOfMedications) {
+		this.typeOfMedications = typeOfMedications;
 	}
 
-	public String getHasReason() {
-		return hasReason;
+	public String getReason() {
+		return reason;
 	}
 
-	public void setHasReason(String hasReason) {
-		this.hasReason = hasReason;
-	}
-
-	public List<String> getHasMedications() {
-		return hasMedications;
-	}
-
-	public void setHasMedications(List<String> hasMedications) {
-		this.hasMedications = hasMedications;
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 
 	@Override
