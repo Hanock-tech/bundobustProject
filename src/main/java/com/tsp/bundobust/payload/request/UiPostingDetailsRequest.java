@@ -17,8 +17,11 @@ public class UiPostingDetailsRequest {
 	private BankDetails bankDetails;
 
 	@Valid
-	private Address address;
+	private Address temporaryAddress;
 
+	@Valid
+	private Address permanentAddress;
+	
 	@Valid
 	private HealthDetails healthDetails;
 
@@ -46,12 +49,20 @@ public class UiPostingDetailsRequest {
 		this.bankDetails = bankDetails;
 	}
 
-	public Address getAddress() {
-		return address;
+	public Address getTemporaryAddress() {
+		return temporaryAddress;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setTemporaryAddress(Address temporaryAddress) {
+		this.temporaryAddress = temporaryAddress;
+	}
+
+	public Address getPermanentAddress() {
+		return permanentAddress;
+	}
+
+	public void setPermanentAddress(Address permanentAddress) {
+		this.permanentAddress = permanentAddress;
 	}
 
 	public HealthDetails getHealthDetails() {

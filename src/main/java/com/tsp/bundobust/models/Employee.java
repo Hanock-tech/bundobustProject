@@ -8,8 +8,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.tsp.bundobust.payload.request.Address;
+import com.tsp.bundobust.payload.request.BankDetails;
+import com.tsp.bundobust.payload.request.HealthDetails;
+import com.tsp.bundobust.payload.request.PersonalSkills;
 import com.tsp.bundobust.payload.request.SignupRequest;
-import com.tsp.bundobust.payload.request.UiPostingDetailsRequest;
 
 @Document(collection = "employee_data")
 public class Employee {
@@ -26,6 +29,8 @@ public class Employee {
 	private String password;
 
 	private Set<String> roles = new HashSet<>();
+	
+	private String rank;
 
 	private String sdpoName;
 
@@ -42,8 +47,16 @@ public class Employee {
 	private String zoneName;
 
 	private String officeType;
+	
+	private PersonalSkills personalSkills;
 
-	private UiPostingDetailsRequest UipostDetailsRequest;
+	private BankDetails bankDetails;
+
+	private Address temporaryAddress;
+
+	private Address permanentAddress;
+	
+	private HealthDetails healthDetails;
 
 	public Employee() {
 
@@ -178,12 +191,52 @@ public class Employee {
 		this.officeType = officeType;
 	}
 
-	public UiPostingDetailsRequest getUipostDetailsRequest() {
-		return UipostDetailsRequest;
+	public PersonalSkills getPersonalSkills() {
+		return personalSkills;
 	}
 
-	public void setUipostDetailsRequest(UiPostingDetailsRequest uipostDetailsRequest) {
-		UipostDetailsRequest = uipostDetailsRequest;
+	public void setPersonalSkills(PersonalSkills personalSkills) {
+		this.personalSkills = personalSkills;
+	}
+
+	public BankDetails getBankDetails() {
+		return bankDetails;
+	}
+
+	public void setBankDetails(BankDetails bankDetails) {
+		this.bankDetails = bankDetails;
+	}
+
+	public Address getTemporaryAddress() {
+		return temporaryAddress;
+	}
+
+	public void setTemporaryAddress(Address temporaryAddress) {
+		this.temporaryAddress = temporaryAddress;
+	}
+
+	public Address getPermanentAddress() {
+		return permanentAddress;
+	}
+
+	public void setPermanentAddress(Address permanentAddress) {
+		this.permanentAddress = permanentAddress;
+	}
+
+	public HealthDetails getHealthDetails() {
+		return healthDetails;
+	}
+
+	public void setHealthDetails(HealthDetails healthDetails) {
+		this.healthDetails = healthDetails;
+	}
+
+	public String getRank() {
+		return rank;
+	}
+
+	public void setRank(String rank) {
+		this.rank = rank;
 	}
 
 	@Override

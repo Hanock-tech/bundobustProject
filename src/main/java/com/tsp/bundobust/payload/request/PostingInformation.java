@@ -20,6 +20,9 @@ public class PostingInformation {
 	private String rank;
 	
 	@NotBlank
+	private String officeType;
+	
+	@NotBlank
 	private String district;
 	
 	@NotBlank
@@ -128,6 +131,14 @@ public class PostingInformation {
 		this.division = division;
 	}
 	
+	public String getOfficeType() {
+		return officeType;
+	}
+
+	public void setOfficeType(String officeType) {
+		this.officeType = officeType;
+	}
+
 	@Override
 	public String toString() {
 		return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);

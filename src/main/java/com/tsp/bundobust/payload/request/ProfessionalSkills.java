@@ -5,19 +5,19 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class ProfessionalSkills {
 
-	private boolean hasFirstAid;
+	private boolean hasFirstAidSkill;
 	private boolean hasComputer;
-	private boolean hasDriving;
-	private boolean hasElectrician;
-	private boolean hasPlumber;
-	private boolean hasSwimming;
+	private boolean hasDrivingSkill;
+	private boolean hasElectricianSkill;
+	private boolean hasPlumberSkill;
+	private boolean hasSwimmingSkill;
 
-	public boolean isHasFirstAid() {
-		return hasFirstAid;
+	public boolean isHasFirstAidSkill() {
+		return hasFirstAidSkill;
 	}
 
-	public void setHasFirstAid(boolean hasFirstAid) {
-		this.hasFirstAid = hasFirstAid;
+	public void setHasFirstAidSkill(boolean hasFirstAidSkill) {
+		this.hasFirstAidSkill = hasFirstAidSkill;
 	}
 
 	public boolean isHasComputer() {
@@ -28,36 +28,36 @@ public class ProfessionalSkills {
 		this.hasComputer = hasComputer;
 	}
 
-	public boolean isHasDriving() {
-		return hasDriving;
+	public boolean isHasDrivingSkill() {
+		return hasDrivingSkill;
 	}
 
-	public void setHasDriving(boolean hasDriving) {
-		this.hasDriving = hasDriving;
+	public void setHasDrivingSkill(boolean hasDrivingSkill) {
+		this.hasDrivingSkill = hasDrivingSkill;
 	}
 
-	public boolean isHasElectrician() {
-		return hasElectrician;
+	public boolean isHasElectricianSkill() {
+		return hasElectricianSkill;
 	}
 
-	public void setHasElectrician(boolean hasElectrician) {
-		this.hasElectrician = hasElectrician;
+	public void setHasElectricianSkill(boolean hasElectricianSkill) {
+		this.hasElectricianSkill = hasElectricianSkill;
 	}
 
-	public boolean isHasPlumber() {
-		return hasPlumber;
+	public boolean isHasPlumberSkill() {
+		return hasPlumberSkill;
 	}
 
-	public void setHasPlumber(boolean hasPlumber) {
-		this.hasPlumber = hasPlumber;
+	public void setHasPlumberSkill(boolean hasPlumberSkill) {
+		this.hasPlumberSkill = hasPlumberSkill;
 	}
 
-	public boolean isHasSwimming() {
-		return hasSwimming;
+	public boolean isHasSwimmingSkill() {
+		return hasSwimmingSkill;
 	}
 
-	public void setHasSwimming(boolean hasSwimming) {
-		this.hasSwimming = hasSwimming;
+	public void setHasSwimmingSkill(boolean hasSwimmingSkill) {
+		this.hasSwimmingSkill = hasSwimmingSkill;
 	}
 
 	@Override
