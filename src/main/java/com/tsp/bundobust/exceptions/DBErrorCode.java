@@ -6,8 +6,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public enum DBErrorCode {
 	
 	GENERIC_EXCEPTION("DB001"),
-	UI_POSTING_DETAILS_ERROR("DB002");
-	
+	UI_POSTING_DETAILS_ERROR("DB002"),
+	UI_GET_DETAILS_ERROR("DB003");
+
 	private String errorCode;
 
 	DBErrorCode(String code) {

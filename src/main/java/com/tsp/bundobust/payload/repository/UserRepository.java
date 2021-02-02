@@ -17,6 +17,6 @@ public interface UserRepository extends MongoRepository<Employee, String> {
 	Boolean existsByid(String id);
 
 	// https://www.baeldung.com/queries-in-spring-data-mongodb       https://www.baeldung.com/spring-data-mongodb-projections-aggregations
-	@Query("{policeStationName: ?0 }")
+	@Query("{policeStationName: ?0}")
 	List<Employee> findByPoliceStationName(@Valid String policeStationName);
 }

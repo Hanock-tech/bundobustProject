@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tsp.bundobust.exceptions.DBErrorCode;
+import com.tsp.bundobust.exceptions.DatabaseException;
+import com.tsp.bundobust.exceptions.IRErrorCode;
+import com.tsp.bundobust.exceptions.InvalidRequestException;
 import com.tsp.bundobust.models.Employee;
 import com.tsp.bundobust.payload.repository.UserRepository;
 import com.tsp.bundobust.response.UIBaseResponse;
@@ -29,9 +33,8 @@ public class EmployeeController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@GetMapping(path = "/details", 
-			headers = "X-Version=1.0", 
-			produces = MediaType.APPLICATION_JSON_VALUE, 
+	@GetMapping(path = "/details", headers = "X-Version=1.0", 
+			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UIBaseResponse> getEmployeeDetails(@Valid @RequestParam String employeeId) {
 		log.info("getEmployeeDetails: for Id={}", employeeId);
@@ -40,17 +43,20 @@ public class EmployeeController {
 		baseResponse.setData(employee);
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
 	}
-	
-	
-	public ResponseEntity<UIBaseResponse> getAllEmployeeDetails(
-			@Valid @RequestParam String policeStationName) {
-		
+
+	@GetMapping(path = "/listemployeedetails", 
+			headers = "X-Version=1.0", produces = MediaType.APPLICATION_JSON_VALUE, 
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UIBaseResponse> getAllEmployeeDetails(@Valid @RequestParam String policeStationName) {
+
 		List<Employee> employees = userRepository.findByPoliceStationName(policeStationName);
-		
-		if(CollectionUtils.isEmpty(employees)) {
-			//TODO: Write exception code and message throw new DatabaseException(uiPostingDetailsError, unprocessableEntity)
+
+		if (CollectionUtils.isEmpty(employees)) {
+			throw new DatabaseException(DBErrorCode.UI_GET_DETAILS_ERROR, HttpStatus.UNPROCESSABLE_ENTITY);
+			// TODO: Write exception code and message throw new
+			// DatabaseException(uiPostingDetailsError, unprocessableEntity)
 		}
-		
+
 		UIBaseResponse baseResponse = new UIBaseResponse();
 		baseResponse.setData(employees);
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
