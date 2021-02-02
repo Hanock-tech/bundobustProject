@@ -11,23 +11,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tsp.bundobust.payload.request.PoliceStationDetails;
-import com.tsp.bundobust.policestationdetails.repository.PoliceStationDetailsRepository;
+import com.tsp.bundobust.payload.request.PoliceStationDetailsUiRequest;
+import com.tsp.bundobust.policestationdb.repository.PoliceStationDetailsRepository;
+import com.tsp.bundobust.repository.data.PoliceStationData;
 import com.tsp.bundobust.response.UIBaseResponse;
 
 @RestController
 @RequestMapping("/api/policestation")
 public class PoliceStationController {
+	
 	@Autowired
 	private PoliceStationDetailsRepository policeStationDetailsRepository;
 
-	@PostMapping(path = "/profile", headers = "X-Version=1.0", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/profile",
+			headers = "X-Version=1.0", 
+			produces = MediaType.APPLICATION_JSON_VALUE, 
+			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UIBaseResponse> createPoliceStationProfile(
-			@Valid @RequestBody PoliceStationDetails policeStationUiRequestDetails) {
+			@Valid @RequestBody PoliceStationDetailsUiRequest uiRequest) {
 		// Request Validation
 
 		// TODO: Saving to police station collection in police station database
-		PoliceStationDetails policeStationDetails = populatePoliceStationDetails(policeStationUiRequestDetails);
+		PoliceStationData policeStationDetails = populatePoliceStationDetails(uiRequest);
 
 		policeStationDetailsRepository.save(policeStationDetails);
 
@@ -35,13 +40,15 @@ public class PoliceStationController {
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
 	}
 
-	private PoliceStationDetails populatePoliceStationDetails(
-			@Valid PoliceStationDetails policeStationUiRequestDetails) {
-
-		PoliceStationDetails policeSationRequest = new PoliceStationDetails();
-		policeSationRequest.setSectors(policeStationUiRequestDetails.getSectors());
-
-		return policeSationRequest;
+	private PoliceStationData populatePoliceStationDetails(@Valid PoliceStationDetailsUiRequest uiRequest) {
+		PoliceStationData policeStationData = new PoliceStationData();
+		policeStationData.setId(uiRequest.getPoliceStationName());
+		policeStationData.setBlueColts(uiRequest.getBlueColts());
+		policeStationData.setHyperSensitivePickets(uiRequest.getHyperSensitivePickets());
+		// TODO : Add remaining setters
+		
+		return policeStationData;
 	}
 
+	
 }

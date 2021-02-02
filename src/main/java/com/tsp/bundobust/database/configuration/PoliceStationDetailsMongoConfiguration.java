@@ -9,7 +9,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import com.mongodb.client.MongoClient;
 
 @Configuration
-@EnableMongoRepositories(basePackages = "com.tsp.bundobust.policestationdetails.repository", mongoTemplateRef = "policeStationDetailsMongoTemplate")
+@EnableMongoRepositories(basePackages = "com.tsp.bundobust.policestationdb.repository", 
+mongoTemplateRef = "policeStationDetailsMongoTemplate")
 public class PoliceStationDetailsMongoConfiguration {
 
 	@Bean

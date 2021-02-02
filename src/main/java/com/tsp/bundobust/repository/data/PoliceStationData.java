@@ -1,4 +1,4 @@
-package com.tsp.bundobust.payload.request;
+package com.tsp.bundobust.repository.data;
 
 import java.util.List;
 
@@ -6,20 +6,42 @@ import javax.validation.constraints.NotBlank;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class Sectors {
+@Document(collection = "policeStation_data")
+public class PoliceStationData {
+	
+	@Id
+	public String id;
+	
+	private String policeStationName;
 
 	@NotBlank
 	public String sectorName;
-	@NotBlank
-	public String inchargeName;
-	public List<String> areas;
+	public List<String> sectorAreas;
 	public List<String> sensitivePickets;
 	public List<String> hyperSensitivePickets;
 	public List<String> immersionPoints;
 	public List<String> mobileParties;
 	public List<String> patrolCars;
 	public List<String> blueColts;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPoliceStationName() {
+		return policeStationName;
+	}
+
+	public void setPoliceStationName(String policeStationName) {
+		this.policeStationName = policeStationName;
+	}
 
 	public String getSectorName() {
 		return sectorName;
@@ -29,20 +51,12 @@ public class Sectors {
 		this.sectorName = sectorName;
 	}
 
-	public String getInchargeName() {
-		return inchargeName;
+	public List<String> getSectorAreas() {
+		return sectorAreas;
 	}
 
-	public void setInchargeName(String inchargeName) {
-		this.inchargeName = inchargeName;
-	}
-
-	public List<String> getAreas() {
-		return areas;
-	}
-
-	public void setAreas(List<String> areas) {
-		this.areas = areas;
+	public void setSectorAreas(List<String> sectorAreas) {
+		this.sectorAreas = sectorAreas;
 	}
 
 	public List<String> getSensitivePickets() {
@@ -97,4 +111,5 @@ public class Sectors {
 	public String toString() {
 		return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
 	}
+
 }
