@@ -15,7 +15,7 @@ public class PoliceStationDetailsMongoConfiguration {
 
 	@Bean
 	public MongoTemplate policeStationDetailsMongoTemplate(@Qualifier("mongo") MongoClient mongo) throws Exception {
-		return new MongoTemplate(mongo, "PoliceStationDatabase");
+		return new MongoTemplate(mongo, "policeStationDatabase");
 	}
 
 }

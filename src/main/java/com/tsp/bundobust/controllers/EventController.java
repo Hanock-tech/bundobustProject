@@ -1,5 +1,8 @@
 package com.tsp.bundobust.controllers;
 
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Random;
 
 import javax.validation.Valid;
@@ -25,19 +28,17 @@ import com.tsp.bundobust.response.UIBaseResponse;
 @RestController
 @RequestMapping("api/event")
 public class EventController {
-	
+
 	private final Logger log = LoggerFactory.getLogger(EventController.class);
-	
+
 	@Autowired
 	private EventRepository eventRepository;
 
-	@PostMapping(headers = "X-Version=1.0", 
-			consumes = MediaType.APPLICATION_JSON_VALUE, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(headers = "X-Version=1.0", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UIBaseResponse> createEvent(@Valid @RequestBody EventDetailsUiRequest uiRequest) {
 
 		log.info("createEvent: Request received={}", uiRequest);
-		//TODO: request validation
+		// TODO: request validation
 		EventData eventData = populateEventDetails(uiRequest);
 		eventRepository.save(eventData);
 		UIBaseResponse baseResponse = new UIBaseResponse();
@@ -46,23 +47,19 @@ public class EventController {
 		baseResponse.setData(uiPostingDetailsResponse);
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
 	}
-	
-	
-	@GetMapping(headers = "X-Version=1.0", 
-			consumes = MediaType.APPLICATION_JSON_VALUE, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UIBaseResponse> getAllActiveEvents() {
 
-		// Fetch from DB
-		// event end date should always be greater
-		// Filtered response
+	@GetMapping(headers = "X-Version=1.0", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UIBaseResponse> getAllActiveEvents() throws ParseException {
+		log.info("getAllActiveEvents : ");
+		List<EventData> eventData = eventRepository.findAll();
+
 		UIBaseResponse baseResponse = new UIBaseResponse();
 		baseResponse.setData(null);
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
 	}
 
 	private EventData populateEventDetails(EventDetailsUiRequest uiRequest) {
-		
+
 		EventData eventDetails = new EventData();
 		eventDetails.setEventId(String.valueOf(new Random().nextInt()));
 		eventDetails.setEventName(uiRequest.getEventName());

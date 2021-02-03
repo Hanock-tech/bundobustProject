@@ -2,6 +2,8 @@ package com.tsp.bundobust.controllers;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,15 +22,18 @@ import com.tsp.bundobust.response.UIBaseResponse;
 @RequestMapping("/api/policestation")
 public class PoliceStationController {
 
+	private Logger log = LoggerFactory.getLogger(PoliceStationController.class);
 	@Autowired
 	private PoliceStationDetailsRepository policeStationDetailsRepository;
 
-	@PostMapping(path = "/profile", headers = "X-Version=1.0", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/profile", 
+			headers = "X-Version=1.0",
+			produces = MediaType.APPLICATION_JSON_VALUE, 
+			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UIBaseResponse> createPoliceStationProfile(
 			@Valid @RequestBody PoliceStationDetailsUiRequest uiRequest) {
 		// Request Validation
-
-		// TODO: Saving to police station collection in police station database
+		log.info("CreatePoliceStationProfile: DetailsRequest={}", uiRequest);
 		PoliceStationData policeStationDetails = populatePoliceStationDetails(uiRequest);
 
 		policeStationDetailsRepository.save(policeStationDetails);
@@ -51,7 +56,6 @@ public class PoliceStationController {
 		policeStationData.setSectorAreas(uiRequest.getSectorAreas());
 		policeStationData.setPatrolCars(uiRequest.getPatrolCars());
 		policeStationData.setSectorName(uiRequest.getSectorName());
-		// TODO : Add remaining setters
 
 		return policeStationData;
 	}
