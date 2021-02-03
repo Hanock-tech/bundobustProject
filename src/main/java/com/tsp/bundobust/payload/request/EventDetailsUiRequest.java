@@ -1,14 +1,19 @@
 package com.tsp.bundobust.payload.request;
 
+import javax.validation.constraints.NotBlank;
+
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class EventDetailsUiRequest {
 
+	@NotBlank
 	private String eventName;
 
+	@NotBlank
 	private String eventStartDate;
 
+	@NotBlank
 	private String eventEndDate;
 
 	private String sdpoName;

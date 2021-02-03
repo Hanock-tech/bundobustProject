@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tsp.bundobust.exceptions.DBErrorCode;
 import com.tsp.bundobust.exceptions.DatabaseException;
-import com.tsp.bundobust.exceptions.IRErrorCode;
-import com.tsp.bundobust.exceptions.InvalidRequestException;
 import com.tsp.bundobust.models.Employee;
 import com.tsp.bundobust.payload.repository.UserRepository;
 import com.tsp.bundobust.response.UIBaseResponse;
@@ -44,19 +42,17 @@ public class EmployeeController {
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
 	}
 
-	@GetMapping(path = "/listemployeedetails", 
+	@GetMapping(path = "/all", 
 			headers = "X-Version=1.0", produces = MediaType.APPLICATION_JSON_VALUE, 
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UIBaseResponse> getAllEmployeeDetails(@Valid @RequestParam String policeStationName) {
 
+		log.info("getAllEmployeeDetails: Request received={}", policeStationName);
 		List<Employee> employees = userRepository.findByPoliceStationName(policeStationName);
-
 		if (CollectionUtils.isEmpty(employees)) {
+			log.error("getEmployeeDetails: empty employee list from database for policestationname={}", policeStationName);
 			throw new DatabaseException(DBErrorCode.UI_GET_DETAILS_ERROR, HttpStatus.UNPROCESSABLE_ENTITY);
-			// TODO: Write exception code and message throw new
-			// DatabaseException(uiPostingDetailsError, unprocessableEntity)
 		}
-
 		UIBaseResponse baseResponse = new UIBaseResponse();
 		baseResponse.setData(employees);
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
