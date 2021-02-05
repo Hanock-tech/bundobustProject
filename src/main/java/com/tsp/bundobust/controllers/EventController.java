@@ -17,14 +17,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tsp.bundobust.dao.EventDao;
 import com.tsp.bundobust.eventdb.repository.EventRepository;
 import com.tsp.bundobust.eventrepository.data.EventData;
 import com.tsp.bundobust.exceptions.DBErrorCode;
 import com.tsp.bundobust.exceptions.DatabaseException;
+import com.tsp.bundobust.payload.request.AllocateEmployeeUiRequest;
 import com.tsp.bundobust.payload.request.EventDetailsUiRequest;
 import com.tsp.bundobust.payload.response.UIPostingDetailsResponse;
 import com.tsp.bundobust.response.UIBaseResponse;
@@ -37,8 +40,13 @@ public class EventController {
 
 	@Autowired
 	private EventRepository eventRepository;
+	
+	@Autowired
+	private EventDao eventDao;
 
-	@PostMapping(headers = "X-Version=1.0", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(headers = "X-Version=1.0", 
+			consumes = MediaType.APPLICATION_JSON_VALUE, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UIBaseResponse> createEvent(@Valid @RequestBody EventDetailsUiRequest uiRequest) {
 
 		log.info("createEvent: Request received={}", uiRequest);
@@ -52,7 +60,9 @@ public class EventController {
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
 	}
 
-	@GetMapping(headers = "X-Version=1.0", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(headers = "X-Version=1.0", 
+			consumes = MediaType.APPLICATION_JSON_VALUE, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UIBaseResponse> getAllActiveEvents() throws ParseException {
 		log.info("getAllActiveEvents : ");
 		List<EventData> activeEvents = new ArrayList<EventData>();
@@ -61,9 +71,7 @@ public class EventController {
 			log.error("getAllActiveEvents: empty Event list from database for ActiveEvents={}", eventsData);
 			throw new DatabaseException(DBErrorCode.UI_GET_DETAILS_ERROR, HttpStatus.UNPROCESSABLE_ENTITY);
 		}
-		System.out.println(LocalDate.now());
 		for (EventData data : eventsData) {
-			System.out.println((LocalDate.parse(data.getEventEndDate()).isAfter(LocalDate.now())));
 			if ((LocalDate.parse(data.getEventEndDate()).isAfter(LocalDate.now()))) {
 				EventData result = new EventData();
 				result.setEventEndDate(data.getEventEndDate());
@@ -84,6 +92,17 @@ public class EventController {
 		UIBaseResponse baseResponse = new UIBaseResponse();
 		baseResponse.setData(activeEvents);
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+	}
+	
+	
+	@PutMapping(path="/employee/assign")
+	public ResponseEntity<UIBaseResponse> assignStaffToEvent(@Valid @RequestBody AllocateEmployeeUiRequest uiRequest) {
+		
+		// TODO: Add validations
+		//upsert to event collection - key "allocated staff" by event id
+		// update to a new collection the employee status 
+		return null;
+	
 	}
 
 	private EventData populateEventDetails(EventDetailsUiRequest uiRequest) {
