@@ -40,13 +40,11 @@ public class EventController {
 
 	@Autowired
 	private EventRepository eventRepository;
-	
+
 	@Autowired
 	private EventDao eventDao;
 
-	@PostMapping(headers = "X-Version=1.0", 
-			consumes = MediaType.APPLICATION_JSON_VALUE, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(headers = "X-Version=1.0", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UIBaseResponse> createEvent(@Valid @RequestBody EventDetailsUiRequest uiRequest) {
 
 		log.info("createEvent: Request received={}", uiRequest);
@@ -60,9 +58,7 @@ public class EventController {
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
 	}
 
-	@GetMapping(headers = "X-Version=1.0", 
-			consumes = MediaType.APPLICATION_JSON_VALUE, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(headers = "X-Version=1.0", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UIBaseResponse> getAllActiveEvents() throws ParseException {
 		log.info("getAllActiveEvents : ");
 		List<EventData> activeEvents = new ArrayList<EventData>();
@@ -93,16 +89,24 @@ public class EventController {
 		baseResponse.setData(activeEvents);
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
 	}
-	
-	
-	@PutMapping(path="/employee/assign")
-	public ResponseEntity<UIBaseResponse> assignStaffToEvent(@Valid @RequestBody AllocateEmployeeUiRequest uiRequest) {
-		
+
+	@PutMapping(path = "/employee/assign",
+			headers = "X-Version=1.0", 
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UIBaseResponse> deployStaffToEvent(@Valid @RequestBody AllocateEmployeeUiRequest uiRequest) {
+		log.info("deployStaffToEvent: Request received={}", uiRequest);
 		// TODO: Add validations
-		//upsert to event collection - key "allocated staff" by event id
-		// update to a new collection the employee status 
-		return null;
-	
+		UIBaseResponse baseResponse = new UIBaseResponse();
+		UIPostingDetailsResponse uiPostingDetailsResponse = new UIPostingDetailsResponse();
+		boolean result = eventDao.updateStaff(uiRequest.getEventId(), uiRequest.getEmployees());
+
+		if (result == true) {
+			uiPostingDetailsResponse.setId(uiRequest.getEventId());
+			baseResponse.setData(uiPostingDetailsResponse);
+		}
+		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+
 	}
 
 	private EventData populateEventDetails(EventDetailsUiRequest uiRequest) {

@@ -10,7 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class RegionDetails {
 	private String districtName;
 	private List<Sdpos> sdpos;
-
+    private  String zoneDetails;
+    private String divisionName;
+    
 	public String getDistrictName() {
 		return districtName;
 	}
@@ -26,6 +28,23 @@ public class RegionDetails {
 	public void setSdpos(List<Sdpos> sdpos) {
 		this.sdpos = sdpos;
 	}
+	
+	public String getZoneDetails() {
+		return zoneDetails;
+	}
+
+	public void setZoneDetails(String zoneDetails) {
+		this.zoneDetails = zoneDetails;
+	}
+
+	public String getDivisionName() {
+		return divisionName;
+	}
+
+	public void setDivisionName(String divisionName) {
+		this.divisionName = divisionName;
+	}
+
 	@Override
 	public String toString() {
 		return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);

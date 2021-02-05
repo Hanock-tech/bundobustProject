@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +37,10 @@ public class RegionReferenceDataController {
 	@Autowired
 	private RegionsDataRepository regionsRepository;
 
-	@PostMapping(value = "/details")
+	@PostMapping(value = "/details",
+			headers = "X-Version=1.0", 
+			consumes = MediaType.APPLICATION_JSON_VALUE, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UIBaseResponse> getRegions(@Valid @RequestParam String districtName) {
 
 		log.info("getdistricts :  for districtName={}" + districtName);
@@ -44,18 +48,21 @@ public class RegionReferenceDataController {
 
 		UIBaseResponse response = new UIBaseResponse();
 		response.setData(details);
+
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	@GetMapping()
+	@GetMapping( value="",headers = "X-Version=1.0",
+			consumes = MediaType.APPLICATION_JSON_VALUE, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UIBaseResponse> getAllDistrictsAndCommisionerates() {
 
 		log.info("getAllDistrictsAndCommissionerate : ");
 		List<LocationDetails> detailsList = new ArrayList<LocationDetails>();
 		List<LocationDetails> districtsAndCommissionerate = regionsDataRepository.findAll();
-	
+
 		if (CollectionUtils.isEmpty(districtsAndCommissionerate)) {
-			log.error("getAllDistrictsAndCommisionerates ",districtsAndCommissionerate);
+			log.error("getAllDistrictsAndCommisionerates ", districtsAndCommissionerate);
 			throw new DatabaseException(DBErrorCode.UI_GET_DETAILS_ERROR, HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 		for (LocationDetails details : districtsAndCommissionerate) {

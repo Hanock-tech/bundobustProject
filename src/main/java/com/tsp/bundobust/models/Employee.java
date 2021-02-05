@@ -29,7 +29,7 @@ public class Employee {
 	private String password;
 
 	private Set<String> roles = new HashSet<>();
-	
+
 	private String rank;
 
 	private String sdpoName;
@@ -47,7 +47,9 @@ public class Employee {
 	private String zoneName;
 
 	private String officeType;
-	
+
+	private String status;
+
 	private PersonalSkills personalSkills;
 
 	private BankDetails bankDetails;
@@ -55,7 +57,7 @@ public class Employee {
 	private Address temporaryAddress;
 
 	private Address permanentAddress;
-	
+
 	private HealthDetails healthDetails;
 
 	public Employee() {
@@ -77,6 +79,14 @@ public class Employee {
 		this.zoneName = request.getZoneName();
 		this.email = request.getEmail();
 		this.officeType = request.getOfficeType();
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getId() {

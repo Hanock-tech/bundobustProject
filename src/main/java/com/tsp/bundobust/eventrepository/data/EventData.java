@@ -1,5 +1,7 @@
 package com.tsp.bundobust.eventrepository.data;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "event_data")
@@ -116,4 +118,8 @@ public class EventData {
 		this.divisionName = divisionName;
 	}
 
+	@Override
+	public String toString() {
+		return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
+	}
 }

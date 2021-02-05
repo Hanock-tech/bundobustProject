@@ -6,6 +6,6 @@ import com.tsp.bundobust.models.Employee;
 
 public interface EventDao {
 	
-	void updateStaff(String eventId, List<Employee> employees);
+	boolean updateStaff(String eventId, List<Employee> employees);
 
 }
